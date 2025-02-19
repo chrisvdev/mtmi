@@ -25,7 +25,7 @@ export const parseMessageWithEmotes = (fields : any) => {
     i = end + 1;
   });
 
-  i < rawMessage.length && newMessage.push(createFragment(rawMessage.substring(i, rawMessage.length)));
+  i < rawMessage.length && newMessage.push(createFragment(rawMessage.substring(i)));
 
   return groupElements(newMessage);
 };
