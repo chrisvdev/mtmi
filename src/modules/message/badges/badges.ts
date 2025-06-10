@@ -906,6 +906,12 @@ export default [
     value: 0
   },
   {
+    text: "share-the-love/0",
+    image: "https://static-cdn.jtvnw.net/badges/v1/2de71f4f-b152-4308-a426-127a4cf8003a/3",
+    description: "Share the love",
+    value: 0
+  },
+  {
     text: "staff/1",
     image: "https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/3",
     description: "Staff",

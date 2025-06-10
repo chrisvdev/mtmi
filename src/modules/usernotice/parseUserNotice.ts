@@ -7,13 +7,43 @@ import { parseRaid, RaidGroupType } from "@/modules/usernotice/parseRaid";
 import { parseAnnouncement, AnnouncementGroupType } from "@/modules/usernotice/parseAnnouncement";
 import { parseViewerMilestone, ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone.js";
 
-interface UserNoticeInfoType {
+export interface BaseUserNotice {
   type: string,
   channel: string,
   userInfo: UserInfoType,
   messageInfo: MessageInfoType,
   message: string,
   raw: string,
+}
+
+export interface SubNoticeType extends BaseUserNotice {
+  type: "sub" | "resub" | "giftpaidupgrade" | "primepaidupgrade";
+  subInfo: SubInfoOptionalType;
+}
+
+export interface RaidNoticeType extends BaseUserNotice {
+  type: "raid";
+  raidInfo: RaidGroupType;
+}
+
+export interface GiftNoticeType extends BaseUserNotice {
+  type: "submysterygift" | "standardpayforward" | "subgiftpaidupgrade" | "subgift";
+  giftInfo: GiftGroupType;
+}
+
+export interface AnnouncementNoticeType extends BaseUserNotice {
+  type: "announcement";
+  announcementInfo: AnnouncementGroupType;
+}
+
+export interface ViewerMilestoneNoticeType extends BaseUserNotice {
+  type: "viewermilestone";
+  milestoneInfo: ViewerMilestoneType;
+}
+
+// type UserNoticeInfoType = "SubNoticeType" | "RaidNoticeType" | "GiftNoticeType" | "AnnouncementNoticeType" | "ViewerMilestone";
+
+export interface UserNoticeInfoType extends BaseUserNotice {
   subInfo?: SubInfoOptionalType,
   giftInfo?: GiftGroupType,
   raidInfo?: RaidGroupType,

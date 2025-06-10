@@ -1,5 +1,5 @@
-import { client } from "../dist/mtmi.js";
-// import { client } from "../src/mtmi.ts";
+// import { client } from "../dist/mtmi.js";
+import { client } from "../src/mtmi.ts";
 
 // window.client = client;
 
@@ -7,8 +7,8 @@ const channels = ["manzdev"];
 
 client.connect({ channels });
 
-client.on("join", (data) => console.log("JOIN: ", data));
-client.on("part", (data) => console.log("PART: ", data));
+// client.on("join", (data) => console.log("JOIN: ", data));
+// client.on("part", (data) => console.log("PART: ", data));
 
 client.on("sub", (data) => console.log("SUB: ", data));
 client.on("resub", (data) => console.log("RESUB: ", data));

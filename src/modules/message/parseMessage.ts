@@ -1,5 +1,6 @@
 import { parseMessageWithEmotes } from "./emotes/parseMessageWithEmotes";
 import { parseFlags, FlagsType } from "./parseFlags";
+import { createMessage } from "./emotes/createMessage";
 
 export interface MessageInfoType {
   id: string,
@@ -15,6 +16,7 @@ export interface MessageInfoType {
   userId: number,
   tmi: number,
   msgId: string,
+  messageData: Array<Object>,
   message: HTMLSpanElement,
   rawMessage: string
 }
@@ -22,7 +24,8 @@ export interface MessageInfoType {
 export const parseMessage = (fields: any) : MessageInfoType => {
   // eslint-disable-next-line
   const { username, channel, flags, rawMessage } = fields;
-  const message = parseMessageWithEmotes({ rawMessage, ...fields });
+  const messageData = parseMessageWithEmotes({ rawMessage, ...fields });
+  const spanMessage = createMessage(messageData);
   const flagsInfo = parseFlags({ flags, rawMessage });
 
   return {
@@ -38,7 +41,8 @@ export const parseMessage = (fields: any) : MessageInfoType => {
     tmi: Number(fields["tmi-sent-ts"]),
     userId: Number(fields["user-id"]),
     msgId: fields["msg-id"] ?? "message",
-    message,
+    messageData,
+    message: spanMessage,
     rawMessage,
   };
 };

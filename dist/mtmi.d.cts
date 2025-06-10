@@ -80,6 +80,7 @@ interface SubInfoType {
     wasGifted: boolean;
     systemMsg: string;
 }
+type SubInfoOptionalType = SubInfoType | object;
 
 interface ReplyParentType {
     displayName: String;
@@ -143,6 +144,7 @@ interface MessageInfoType {
     userId: number;
     tmi: number;
     msgId: string;
+    messageData: Array<Object>;
     message: HTMLSpanElement;
     rawMessage: string;
 }
@@ -288,6 +290,19 @@ interface ViewerMilestoneType {
     systemMsg: string;
 }
 
+interface BaseUserNotice {
+    type: string;
+    channel: string;
+    userInfo: UserInfoType;
+    messageInfo: MessageInfoType;
+    message: string;
+    raw: string;
+}
+interface SubNoticeType extends BaseUserNotice {
+    type: "sub" | "resub" | "giftpaidupgrade" | "primepaidupgrade";
+    subInfo: SubInfoOptionalType;
+}
+
 /**
  * Tipos de eventos de Twitch que puedes escuchar
  */
@@ -296,7 +311,7 @@ type EventTypeMap = {
     "ban": BanInfoType;
     "timeout": TimeoutInfoType;
     "clearmsg": ClearMsgInfoType;
-    "sub": SubInfoType;
+    "sub": SubNoticeType;
     "resub": SubInfoType;
     "raid": RaidInfoType;
     "join": JoinPartInfoType;

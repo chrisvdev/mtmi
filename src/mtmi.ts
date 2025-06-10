@@ -1,4 +1,4 @@
-import { EventTypeMap } from "./types";
+import type { EventTypeMap } from "./types";
 import { parseClearChat } from "@/modules/clearchat/parseClearChat";
 import { parseUserMessage } from "@/modules/message/parseUserMessage";
 import { parseJoinPart } from "@/modules/joinpart/parseJoinPart";
@@ -19,8 +19,9 @@ interface OnParametersType<T extends keyof EventTypeMap> {
   action: (data: EventTypeMap[T]) => void
 }
 
-const isHttp = location.protocol === "http:";
-const WEBSOCKET_URL = isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
+const isBrowser = "location" in globalThis;
+const isHttp = isBrowser && location.protocol === "http:";
+const WEBSOCKET_URL = isBrowser && isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
 const USERNAME = "justinfan123";
 const DEBUG = true;
 
@@ -48,10 +49,10 @@ class Client {
     const URL = `https://static-cdn.jtvnw.net/previews-ttv/live_user_${channel}-150x100.jpg`;
     return await fetch(URL, { method: "HEAD" })
       .then(response => !response.url.includes("/404_preview"));
-  };
+  }
 
   #open(event : any) {
-    DEBUG && console.log(`Conectado a Twitch: ${event.target.url}`);
+    DEBUG && console.log("Conectado a Twitch.");
 
     this.#client?.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
     this.#client?.send(`NICK ${USERNAME}`);

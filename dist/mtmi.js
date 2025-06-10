@@ -1027,6 +1027,12 @@ var badges_default = [
     value: 0
   },
   {
+    text: "share-the-love/0",
+    image: "https://static-cdn.jtvnw.net/badges/v1/2de71f4f-b152-4308-a426-127a4cf8003a/3",
+    description: "Share the love",
+    value: 0
+  },
+  {
     text: "staff/1",
     image: "https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/3",
     description: "Staff",
@@ -1519,42 +1525,78 @@ var createEmotesDictionary = (rawMessage) => {
   return emoteDictionary.sort((a, b) => a.start - b.start);
 };
 
-// src/modules/message/emotes/getEmote.ts
-var getEmoteImage = (id, format = "default", theme = "dark", scale = "1.0") => {
-  const img = document.createElement("img");
-  img.className = "emote";
-  img.src = `https://static-cdn.jtvnw.net/emoticons/v2/${id}/${format}/${theme}/${scale}`;
-  img.alt = "emote";
-  return img;
-};
-var createFragment = (message) => {
-  const tag = document.createElement("span");
-  tag.textContent = message;
-  return tag;
+// src/modules/message/emotes/createFragments.ts
+var patterns = [
+  { type: "nick", regex: /@[a-zA-Z0-9_\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]+/ },
+  { type: "hexcolor", regex: /#[A-Fa-f0-9]{6}\b/ },
+  { type: "hashtag", regex: /#[a-zA-Z0-9_]+/ },
+  { type: "url", regex: /https?:\/\/[^\s]+/ },
+  { type: "command", regex: /![a-zA-Z0-9_]+/ },
+  { type: "htmltag", regex: /<\/?[a-z]+[^>]*>/gi },
+  { type: "ip", regex: /\b\d{1,3}(?:\.\d{1,3}){3}\b/ },
+  { type: "laugh", regex: /\b(xd+)\b|\b(j(a|e|i|o)*)+\b/i }
+];
+var createFragments = (message) => {
+  const combinedRegex = new RegExp(
+    patterns.map((p) => `(${p.regex.source})`).join("|"),
+    "gi"
+  );
+  const fragments = [];
+  let lastIndex = 0;
+  for (const match of message.matchAll(combinedRegex)) {
+    const matchStr = match[0];
+    const index = match.index ?? 0;
+    if (index > lastIndex) {
+      fragments.push({
+        type: "text",
+        data: message.slice(lastIndex, index)
+      });
+    }
+    const matchedPattern = patterns.find(
+      (p) => new RegExp(`^${p.regex.source}$`, p.regex.flags).test(matchStr)
+    );
+    fragments.push({
+      type: matchedPattern?.type ?? "text",
+      data: matchStr
+    });
+    lastIndex = index + matchStr.length;
+  }
+  if (lastIndex < message.length) {
+    fragments.push({
+      type: "text",
+      data: message.slice(lastIndex)
+    });
+  }
+  return fragments;
 };
 
+// src/modules/message/emotes/createEmoteImage.ts
+var createEmoteImage = (id, format = "default", theme = "dark", scale = "2.0") => ({
+  type: "emote",
+  data: `https://static-cdn.jtvnw.net/emoticons/v2/${id}/${format}/${theme}/${scale}`,
+  id
+});
+
 // src/modules/message/emotes/parseMessageWithEmotes.ts
-var groupElements = (elements) => {
-  const container = document.createElement("span");
-  container.append(...elements);
-  return container;
-};
 var parseMessageWithEmotes = (fields) => {
   const { rawMessage, emotes } = fields;
-  if (!emotes) return createFragment(rawMessage);
+  const newMessage = [];
+  if (!emotes) {
+    newMessage.push(...createFragments(rawMessage));
+    return newMessage;
+  }
   const emoteOnly = Boolean(fields?.["emote-only"]) ?? false;
   const emoteList = createEmotesDictionary(emotes);
-  const newMessage = [];
   let i = 0;
   emoteList.forEach(({ name, start, end }) => {
     if (!emoteOnly) {
-      newMessage.push(createFragment(rawMessage.substring(i, start)));
+      newMessage.push(...createFragments(rawMessage.substring(i, start)));
     }
-    newMessage.push(getEmoteImage(name));
+    newMessage.push(createEmoteImage(name));
     i = end + 1;
   });
-  i < rawMessage.length && newMessage.push(createFragment(rawMessage.substring(i, rawMessage.length)));
-  return groupElements(newMessage);
+  i < rawMessage.length && newMessage.push(...createFragments(rawMessage.substring(i)));
+  return newMessage;
 };
 
 // src/modules/message/parseFlags.ts
@@ -1576,10 +1618,54 @@ var parseFlags = (fields) => {
   return flagData;
 };
 
+// src/modules/message/emotes/createMessageNode.ts
+var createMessageNode = (messageData) => messageData.map((fragment) => {
+  if (fragment.type === "emote") {
+    return `:${fragment.id}:`;
+  } else {
+    return fragment.data;
+  }
+}).join("");
+
+// src/modules/message/emotes/createMessageBrowser.ts
+var createImage = (imageFragment) => {
+  const image = document.createElement("img");
+  image.className = imageFragment.type;
+  image.alt = imageFragment.type;
+  image.src = imageFragment.data;
+  return image;
+};
+var createSpan = (textFragment, className) => {
+  const span = document.createElement("span");
+  className && span.classList.add(className);
+  span.textContent = textFragment.data;
+  return span;
+};
+var createMessageBrowser = (messageData) => {
+  const elements = messageData.map((fragment) => {
+    if (fragment.type === "emote") {
+      return createImage(fragment);
+    } else {
+      return createSpan(fragment, fragment.type);
+    }
+  });
+  const span = document.createElement("span");
+  span.classList.add("message");
+  elements.forEach((fragment) => span.append(fragment));
+  return span;
+};
+
+// src/modules/message/emotes/createMessage.ts
+var createMessage = /* @__PURE__ */ (() => {
+  const isBrowser2 = typeof document !== "undefined";
+  return isBrowser2 ? createMessageBrowser : createMessageNode;
+})();
+
 // src/modules/message/parseMessage.ts
 var parseMessage = (fields) => {
   const { username, channel, flags, rawMessage } = fields;
-  const message = parseMessageWithEmotes({ rawMessage, ...fields });
+  const messageData = parseMessageWithEmotes({ rawMessage, ...fields });
+  const spanMessage = createMessage(messageData);
   const flagsInfo = parseFlags({ flags, rawMessage });
   return {
     id: fields.id,
@@ -1594,7 +1680,8 @@ var parseMessage = (fields) => {
     tmi: Number(fields["tmi-sent-ts"]),
     userId: Number(fields["user-id"]),
     msgId: fields["msg-id"] ?? "message",
-    message,
+    messageData,
+    message: spanMessage,
     rawMessage
   };
 };
@@ -1976,8 +2063,9 @@ var debugId = (raw) => {
 };
 
 // src/mtmi.ts
-var isHttp = location.protocol === "http:";
-var WEBSOCKET_URL = isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
+var isBrowser = "location" in globalThis;
+var isHttp = isBrowser && location.protocol === "http:";
+var WEBSOCKET_URL = isBrowser && isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
 var USERNAME = "justinfan123";
 var DEBUG = true;
 var Client = class {
@@ -2002,7 +2090,7 @@ var Client = class {
     return await fetch(URL, { method: "HEAD" }).then((response) => !response.url.includes("/404_preview"));
   }
   #open(event) {
-    DEBUG && console.log(`Conectado a Twitch: ${event.target.url}`);
+    DEBUG && console.log("Conectado a Twitch.");
     this.#client?.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
     this.#client?.send(`NICK ${USERNAME}`);
     this.channels.forEach(

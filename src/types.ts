@@ -1,22 +1,23 @@
-import { ClearChatInfoType } from "@/modules/clearchat/parseClearChat";
-import { BanInfoType } from "@/modules/clearchat/parseBan";
-import { TimeoutInfoType } from "@/modules/clearchat/parseTimeout";
-import { ClearMsgInfoType } from "@/modules/clearmsg/parseClearMsg";
-import { RoomStateInfoType } from "@/modules/roomstate/parseRoomState";
-import { AnnouncementInfoType } from "./modules/usernotice/parseAnnouncement";
-import { SubInfoType } from "@/modules/usernotice/sub/parseSub";
-import { UserMessageInfoType } from "@/modules/message/parseUserMessage";
-import { JoinPartInfoType } from "@/modules/joinpart/parseJoinPart";
-import { NoticeGroupType } from "@/modules/notice/parseNotice";
-import { RaidInfoType } from "@/modules/usernotice/parseRaid";
-import { MysteryGiftInfoType } from "@/modules/usernotice/gift/parseMysteryGift";
-import { StandardPayforwardInfoType } from "@/modules/usernotice/gift/parseStandardPayforward";
-import { CommunityPayforwardInfoType } from "@/modules/usernotice/gift/parseCommunityPayforward";
-import { GiftPaidUpgradeInfoType } from "@/modules/usernotice/gift/parseGiftPaidUpgrade";
-import { PrimePaidUpgradeInfoType } from "@/modules/usernotice/gift/parsePrimePaidUpgrade";
-import { GiftInfoType } from "@/modules/usernotice/gift/parseSubGift";
-import { BitsInfoType } from "@/modules/message/parseBits";
-import { ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone";
+import type { ClearChatInfoType } from "@/modules/clearchat/parseClearChat";
+import type { BanInfoType } from "@/modules/clearchat/parseBan";
+import type { TimeoutInfoType } from "@/modules/clearchat/parseTimeout";
+import type { ClearMsgInfoType } from "@/modules/clearmsg/parseClearMsg";
+import type { RoomStateInfoType } from "@/modules/roomstate/parseRoomState";
+import type { AnnouncementInfoType } from "./modules/usernotice/parseAnnouncement";
+import type { SubInfoType } from "@/modules/usernotice/sub/parseSub";
+import type { UserMessageInfoType } from "@/modules/message/parseUserMessage";
+import type { JoinPartInfoType } from "@/modules/joinpart/parseJoinPart";
+import type { NoticeGroupType } from "@/modules/notice/parseNotice";
+import type { RaidInfoType } from "@/modules/usernotice/parseRaid";
+import type { SubNoticeType } from "@/modules/usernotice/parseUserNotice";
+import type { MysteryGiftInfoType } from "@/modules/usernotice/gift/parseMysteryGift";
+import type { StandardPayforwardInfoType } from "@/modules/usernotice/gift/parseStandardPayforward";
+import type { CommunityPayforwardInfoType } from "@/modules/usernotice/gift/parseCommunityPayforward";
+import type { GiftPaidUpgradeInfoType } from "@/modules/usernotice/gift/parseGiftPaidUpgrade";
+import type { PrimePaidUpgradeInfoType } from "@/modules/usernotice/gift/parsePrimePaidUpgrade";
+import type { GiftInfoType } from "@/modules/usernotice/gift/parseSubGift";
+import type { BitsInfoType } from "@/modules/message/parseBits";
+import type { ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone";
 
 export type EventType =
   "join" | "part" |
@@ -52,7 +53,7 @@ export type EventTypeMap = {
   // El streamer o un moderador ha eliminado el mensaje de un usuario.
   "clearmsg": ClearMsgInfoType,
   // Un usuario se ha suscrito por primera vez al canal
-  "sub": SubInfoType,
+  "sub": SubNoticeType,
   // Un usuario se ha vuelto a suscribir al canal
   "resub": SubInfoType,
   // Un usuario ha hecho raid y ha traído usuarios al canal
