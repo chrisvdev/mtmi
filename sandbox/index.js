@@ -3,7 +3,7 @@ import { client } from "../src/mtmi.ts";
 
 // window.client = client;
 
-const channels = ["jackie_codes", "alexelcapo", "jujalag"];
+const channels = ["manzdev"];
 
 client.connect({ channels });
 

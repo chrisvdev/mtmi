@@ -1,7 +1,7 @@
 import { client } from "../dist/mtmi.js";
 import { styleText } from "node:util";
 
-const channels = ["jackie_codes", "alexelcapo"];
+const channels = ["manzdev"];
 
 client.connect({ channels });
 
