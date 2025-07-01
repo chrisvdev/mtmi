@@ -1,6 +1,6 @@
 {
   "name": "mtmi",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "type": "module",
   "module": "dist/mtmi.js",
   "types": "dist/mtmi.d.ts",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "node": "tsup --watch src/mtmi.ts && node dist/mtmi.js",
+    "node": "tsup --watch src/mtmi.ts",
     "build": "rm -f dist/mtmi.* && tsup --format esm,cjs --dts src/mtmi.ts src/mtmi.ts",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
@@ -26,9 +26,8 @@
     "gh-pages": "^6.3.0",
     "jsdoc": "^4.0.4",
     "tsup": "^8.5.0",
-    "typedoc": "^0.26.5",
-    "vite": "^4.5.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "keywords": [],
   "license": "ISC"

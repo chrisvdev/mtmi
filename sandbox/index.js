@@ -3,7 +3,7 @@ import { client } from "../src/mtmi.ts";
 
 // window.client = client;
 
-const channels = ["manzdev"];
+const channels = ["jackie_codes", "alexelcapo", "jujalag"];
 
 client.connect({ channels });
 
@@ -39,7 +39,10 @@ client.on("announcement", (data) => console.log("ANNOUNCEMENT: ", data));
 
 client.on("bits", (data) => console.log("BITS: ", data));
 
-client.on("message", (data) => console.log("MESSAGE: ", data));
+client.on("message", (data) => {
+  console.log("MESSAGE: ", data);
+  document.body.append(data.messageInfo.message);
+});
 
 client.on("action", (data) => console.log("MESSAGE ACTION: ", data));
 

@@ -2064,7 +2064,7 @@ var debugId = (raw) => {
 
 // src/mtmi.ts
 var isBrowser = "location" in globalThis;
-var isHttp = isBrowser && location.protocol === "http:";
+var isHttp = isBrowser && location?.protocol === "http:";
 var WEBSOCKET_URL = isBrowser && isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
 var USERNAME = "justinfan123";
 var DEBUG = true;
@@ -2136,16 +2136,37 @@ var Client = class {
         case "USERNOTICE":
           this.#manageEvent(parseUserNotice({ eventMessage }));
           break;
+        /*
+        case "GLOBALUSERSTATE":
+          console.log("----> GLOBALUSERSTATE: ", eventMessage);
+          break;
+        case "USERSTATE":
+          console.log("----> USERSTATE: ", eventMessage);
+          break;
+        case "RECONNECT":
+          console.log("----> RECONNECT: ", eventMessage);
+          break;
+        */
         case "CAP":
+        // CAP: Connect
         case "001":
+        // 001: Welcome
         case "002":
+        // 002: Host
         case "003":
+        // 003: Server
         case "004":
+        // 004: ?
         case "372":
+        // 372: Egg Easter
         case "375":
+        // 375: ?
         case "376":
+        // 376: ?
         case "353":
+        // 353: NAMES IRC
         case "366":
+        // 366: /NAMES IRC
         case "421":
           break;
         default:

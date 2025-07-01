@@ -11,7 +11,7 @@ import { debugId } from "@/debugId";
 import { chop } from "@/modules/utils";
 
 interface OptionsObject {
-  channels: Array<String>
+  channels: Array<string>
 }
 
 interface OnParametersType<T extends keyof EventTypeMap> {
@@ -19,18 +19,19 @@ interface OnParametersType<T extends keyof EventTypeMap> {
   action: (data: EventTypeMap[T]) => void
 }
 
+const DOMAIN = "irc-ws.chat.twitch.tv";
 const isBrowser = "location" in globalThis;
-const isHttp = isBrowser && location.protocol === "http:";
-const WEBSOCKET_URL = isBrowser && isHttp ? "ws://irc-ws.chat.twitch.tv:80" : "wss://irc-ws.chat.twitch.tv:443";
+const isHttp = isBrowser && location?.protocol === "http:";
+const WEBSOCKET_URL = isBrowser && isHttp ? `ws://${DOMAIN}:80` : `wss://${DOMAIN}:443`;
 const USERNAME = "justinfan123";
 const DEBUG = true;
 
 class Client {
   #client : WebSocket | undefined;
-  #startTime: Number | undefined;
+  #startTime: number | undefined;
   #events : Array<OnParametersType<any>> = [];
   #done = false;
-  channels : Array<String> = [];
+  channels : Array<string> = [];
   options: OptionsObject | undefined;
 
   connect(options: OptionsObject) {
