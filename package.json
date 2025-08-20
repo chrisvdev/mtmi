@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "vite",
     "node": "tsdown --watch src/mtmi.ts",
-    "build": "rm -f dist/mtmi.* && tsdown --format esm --dts src/mtmi.ts",
+    "build": "rm -f dist/mtmi.* && tsdown --format esm,cjs --dts src/mtmi.ts src/mtmi.ts",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test": "vitest"
