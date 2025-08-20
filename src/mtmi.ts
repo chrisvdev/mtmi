@@ -21,8 +21,7 @@ interface OnParametersType<T extends keyof EventTypeMap> {
 
 const DOMAIN = "irc-ws.chat.twitch.tv";
 const isBrowser = "location" in globalThis;
-const isHttp = isBrowser && location?.protocol === "http:";
-const WEBSOCKET_URL = isBrowser && isHttp ? `ws://${DOMAIN}:80` : `wss://${DOMAIN}:443`;
+const WEBSOCKET_URL = `wss://${DOMAIN}:443`;
 const USERNAME = "justinfan123";
 const DEBUG = true;
 
@@ -39,7 +38,7 @@ class Client {
     this.#done = false;
     this.#client = new WebSocket(WEBSOCKET_URL);
     this.#startTime = new Date().getTime();
-    this.channels = [...options.channels];
+    this.channels = "channels" in options ? [...options.channels] : [];
 
     this.#client.addEventListener("open", this.#open.bind(this));
     this.#client.addEventListener("message", this.#message.bind(this));

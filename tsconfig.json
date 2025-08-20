@@ -4,9 +4,12 @@
     "target": "ESNext",
     "module": "ESNext",
     "rootDir": "./src",
-    // "moduleResolution": "Node16",
-    "outDir": "./dist",
-    "baseUrl": "./src",
+    "moduleResolution": "Node", // "moduleResolution": "Node16",
+    "strict": true,
+    "declaration": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "baseUrl": "src",
     "paths": {
       "@/*": [
         "*"
@@ -16,9 +19,7 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "noImplicitAny": false,
-    "skipLibCheck": true,
   },
   "exclude": [
     "dist",

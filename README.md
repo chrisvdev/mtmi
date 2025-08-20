@@ -26,7 +26,7 @@ Nota: Si tu intención es escribir mensajes en el chat, tendrías que utilizar l
 Puedes utilizar `mtmi` directamente desde un CDN, sin necesidad de usar `npm` u otros:
 
 ```js
-import { client } from "https://unpkg.com/mtmi@0.0.3/dist/mtmi.js";
+import { client } from "https://unpkg.com/mtmi@0.0.6/dist/mtmi.js";
 ```
 
 Si lo prefieres, puedes usar `npm`, `yarn` o `pnpm`:
@@ -50,7 +50,7 @@ A continuación tienes una lista de desplegables con la información necesaria p
 <div>
 
 ```js
-import { client } from "https://unpkg.com/mtmi@0.0.3/dist/mtmi.js";
+import { client } from "https://unpkg.com/mtmi@0.0.6/dist/mtmi.js";
 
 client.connect({ channels: ["manzdev"] });
 
@@ -190,7 +190,7 @@ Los `scoreList` tienen un campo `level` (numérico) y un campo `flag` que puede 
 <div>
 
 ```js
-import { client } from "https://unpkg.com/mtmi@0.0.3/dist/mtmi.js";
+import { client } from "https://unpkg.com/mtmi@0.0.6/dist/mtmi.js";
 
 client.connect({ channels: ["manzdev"] });
 

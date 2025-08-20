@@ -8,7 +8,7 @@ const createImage = (imageFragment) => {
 
 const create7tvImage = (imageFragment) => {
   const image = document.createElement("img");
-  image.className = imageFragment.type;
+  image.className = `emote ${imageFragment.type}`;
   image.alt = imageFragment.type;
   image.src = `https://cdn.7tv.app/emote/${imageFragment.id}/2x.avif`;
   return image;
