@@ -1,4 +1,4 @@
-import { process7tvMessages } from "./7tv/search7tvEmotes.ts";
+import { process7tvMessages } from "./7tv/search7tvEmotes";
 
 type Fragment = {
   type: string;

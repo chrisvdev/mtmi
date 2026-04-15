@@ -10,6 +10,8 @@ lerna-debug.log*
 sandbox/test/
 
 node_modules
+dist/
+*.tgz
 *.local
 
 # Editor directories and files

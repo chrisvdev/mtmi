@@ -2,18 +2,18 @@
   "name": "mtmi",
   "version": "0.0.8",
   "type": "module",
-  "module": "dist/mtmi.js",
-  "types": "dist/mtmi.d.ts",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/mtmi.js",
-      "require": "./dist/mtmi.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
     "dev": "vite",
-    "node": "tsdown --watch src/mtmi.ts",
-    "build": "rm -f dist/mtmi.* && tsdown --format esm,cjs --dts src/mtmi.ts src/mtmi.ts",
+    "node": "tsdown --watch src/index.ts",
+    "build": "rm -f dist/index.* && tsdown --format esm,cjs --no-dts src/index.ts && tsc --emitDeclarationOnly --outDir dist",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test": "vitest"

@@ -12,14 +12,14 @@ export const process7tvMessages = messageData =>
     if (type !== 'text') return [{ type, data }];
 
     const words = data.split(/(\s+)/).filter(Boolean);
-    const result = [];
+    const result: Array<{ type: string; data: string; id?: string }> = [];
 
     for (const word of words) {
       if (emoteSet.has(word)) {
-        const id = emotes.find(emote => emote.name === word).id;
+        const id = emotes.find(emote => emote.name === word)?.id;
         result.push({ type: '7tv', data: word, id });
-      } else if (result.length && result.at(-1).type === 'text') {
-        result.at(-1).data += word;
+      } else if (result.length && result.at(-1)?.type === 'text') {
+        result.at(-1)!.data += word;
       } else {
         result.push({ type: 'text', data: word });
       }

@@ -11,15 +11,14 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ]
+      "@/*": ["*"]
     },
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
+    "resolveJsonModule": true
   },
   "exclude": [
     "dist",
@@ -29,6 +28,8 @@
     "vite.config.js",
     "node_modules",
     "**/*.test.js",
+    "**/*.test.ts",
     "**/*.spec.js",
-  ],
+    "**/*.spec.ts"
+  ]
 }
