@@ -7,7 +7,7 @@ export interface BadgeInfoType {
   /** Nombre del badge. */
   name: string,
   /** Valor asociado al badge. */
-  value: number,
+  value: string,
   /** Imagen identificativa del badge. */
   image: string,
   /** Descripción del badge. */
