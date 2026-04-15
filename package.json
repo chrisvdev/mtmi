@@ -2,6 +2,9 @@
   "name": "mtmi",
   "version": "0.0.8",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -11,9 +14,10 @@
     }
   },
   "scripts": {
+    "update-badges": "node scripts/get_global_badges.js",
     "dev": "vite",
     "node": "tsdown --watch src/index.ts",
-    "build": "rm -f dist/index.* && tsdown --format esm,cjs --no-dts src/index.ts && tsc --emitDeclarationOnly --outDir dist",
+    "build": "npm run update-badges && rm -f dist/index.* && tsdown --format esm,cjs --no-dts src/index.ts && tsc --emitDeclarationOnly --outDir dist",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test": "vitest"
