@@ -14,10 +14,10 @@
     }
   },
   "scripts": {
-    "update-badges": "node scripts/get_global_badges.js",
+    "update-badges": "node scripts/getGlobalBadges.js",
     "dev": "vite",
     "node": "tsdown --watch src/index.ts",
-    "build": "npm run update-badges && rm -f dist/index.* && tsdown --format esm,cjs --no-dts src/index.ts && tsc --emitDeclarationOnly --outDir dist",
+    "build": "rm -f dist/index.* && tsdown --format esm,cjs --no-dts src/index.ts && tsc --emitDeclarationOnly --outDir dist",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test": "vitest"
