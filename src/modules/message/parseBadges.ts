@@ -2,6 +2,8 @@ import { parseSlashToString, cleanMessage } from "@/modules/utils";
 import { BadgeInfoType, parseBadgeInfo } from "./badges/parseBadgeInfo";
 import badgesInfo from "./badges/badges";
 
+const MAX_SUB_IMAGE = "https://static-cdn.jtvnw.net/badges/v1/ed51a614-2c44-4a60-80b6-62908436b43a/3";
+
 export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
   const badges : any = parseSlashToString(fields.badges) || {};
   const badgeInfo: any = parseBadgeInfo(fields["badge-info"]);
@@ -28,6 +30,7 @@ export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
       description: keyData.description
     };
 
+    name === "subscriber" && data.value > 6 && !data.image && (data.image = MAX_SUB_IMAGE);
     name === "subscriber" && (data.fullMonths = Number(badgeInfo.subscriber));
     name === "founder" && (data.founderNumber = Number(badgeInfo.founder));
     name === "predictions" && (data.predictionInfo = cleanMessage(badgeInfo.predictions));
