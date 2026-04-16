@@ -41,7 +41,12 @@ client.on("bits", (data) => console.log("BITS: ", data));
 
 client.on("message", (data) => {
   console.log("MESSAGE: ", data);
-  document.body.append(data.messageInfo.message);
+  const badges = data.badges.map(item => `<img src="${item.image}" alt="${item.name}">`);
+  const div = document.createElement("div");
+  div.append(data.username);
+  div.insertAdjacentHTML("afterbegin", badges.join(""));
+  div.append(data.messageInfo.message);
+  document.body.append(div);
 });
 
 client.on("action", (data) => console.log("MESSAGE ACTION: ", data));
