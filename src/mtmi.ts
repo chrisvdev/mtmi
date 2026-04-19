@@ -11,7 +11,8 @@ import { debugId } from "@/debugId.ts";
 import { chop } from "@/modules/utils.ts";
 
 interface OptionsObject {
-  channels: Array<string>
+  channels: Array<string>;
+  secure: boolean
 }
 
 interface OnParametersType<T extends keyof EventTypeMap> {
@@ -20,14 +21,14 @@ interface OnParametersType<T extends keyof EventTypeMap> {
 }
 
 const DOMAIN = "irc-ws.chat.twitch.tv";
-const isBrowser = "location" in globalThis;
-const WEBSOCKET_URL = `wss://${DOMAIN}:443`;
+const WEBSOCKET_URL = `ws://${DOMAIN}:80`;
+const WEBSOCKET_SECURE_URL = `wss://${DOMAIN}:443`;
 const USERNAME = "justinfan123";
 const DEBUG = true;
 
 class Client {
   #client : WebSocket | undefined;
-  #startTime: number | undefined;
+  #startTime: number | undefined;   // eslint-disable-line
   #events : Array<OnParametersType<any>> = [];
   #done = false;
   channels : Array<string> = [];
@@ -36,9 +37,13 @@ class Client {
   connect(options: OptionsObject) {
     this.options = options;
     this.#done = false;
-    this.#client = new WebSocket(WEBSOCKET_URL);
     this.#startTime = new Date().getTime();
-    this.channels = "channels" in options ? [...options.channels] : [];
+    this.#client = (options.secure ?? true)
+      ? new WebSocket(WEBSOCKET_SECURE_URL)
+      : new WebSocket(WEBSOCKET_URL);
+    this.channels = "channels" in options
+      ? [...options.channels]
+      : [];
 
     this.#client.addEventListener("open", this.#open.bind(this));
     this.#client.addEventListener("message", this.#message.bind(this));
