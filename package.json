@@ -39,8 +39,7 @@
     "jsdoc": "^4.0.5",
     "tsdown": "^0.21.9",
     "typescript": "^5.9.2",
-    "vite": "^6.3.5",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite": "^8.0.8"
   },
   "keywords": [],
   "license": "ISC"

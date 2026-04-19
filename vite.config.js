@@ -1,4 +1,3 @@
-import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vite";
 import { basename } from "node:path";
 import { cwd } from "node:process";
@@ -13,17 +12,12 @@ export default defineConfig({
   base,
   mode,
   publicDir: "../public",
-  plugins: [tsconfigPaths()],
-  // resolve: { alias: { "@": new URL("./src", import.meta.url).pathname } },
+  plugins: [],
   build: {
-    /*
-    lib: {
-      entry: resolve(__dirname, "lib/main.js"),
-      name: "mtmi",
-      filename: "mtmi"
-    },
-    */
     outDir: "../dist",
     assetsDir: "./"
+  },
+  resolve: {
+    tsconfigPaths: true
   }
 });
