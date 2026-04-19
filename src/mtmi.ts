@@ -34,6 +34,17 @@ class Client {
   channels : Array<string> = [];
   options: OptionsObject | undefined;
 
+  // Handlers
+  #openHandler: () => void;
+  #messageHandler: (e: MessageEvent) => void;
+  #closeHandler: (e: CloseEvent) => void;
+
+  constructor() {
+    this.#openHandler = this.#open.bind(this);
+    this.#messageHandler = this.#message.bind(this);
+    this.#closeHandler = this.#close.bind(this);
+  }
+
   connect(options: OptionsObject) {
     this.options = options;
     this.#done = false;
@@ -45,9 +56,9 @@ class Client {
       ? [...options.channels]
       : [];
 
-    this.#client.addEventListener("open", this.#open.bind(this));
-    this.#client.addEventListener("message", this.#message.bind(this));
-    this.#client.addEventListener("close", this.#close.bind(this));
+    this.#client.addEventListener("open", this.#openHandler);
+    this.#client.addEventListener("message", this.#messageHandler);
+    this.#client.addEventListener("close", this.#closeHandler);
   }
 
   async isLive(channel) {
@@ -56,7 +67,7 @@ class Client {
       .then(response => !response.url.includes("/404_preview"));
   }
 
-  #open(event : any) {
+  #open() {
     DEBUG && console.log("Conectado a Twitch.");
 
     this.#client?.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
@@ -168,9 +179,9 @@ class Client {
   }
 
   close() {
-    this.#client?.removeEventListener("open", this.#open.bind(this));
-    this.#client?.removeEventListener("message", this.#message.bind(this));
-    this.#client?.removeEventListener("close", this.#close.bind(this));
+    this.#client?.removeEventListener("open", this.#openHandler);
+    this.#client?.removeEventListener("message", this.#messageHandler);
+    this.#client?.removeEventListener("close", this.#closeHandler);
     this.#client?.close();
   }
 

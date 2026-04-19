@@ -12,7 +12,7 @@ export const parseMessageWithEmotes = (fields : any) => {
     return newMessage;
   }
 
-  const emoteOnly = Boolean(fields?.["emote-only"]) ?? false;
+  const emoteOnly = Boolean(fields["emote-only"]);
   const emoteList = createEmotesDictionary(emotes);
 
   let i = 0;

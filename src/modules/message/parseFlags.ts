@@ -18,7 +18,7 @@ interface FlagFragmentType {
   scoreList: Array<ScoreType>
 }
 
-export type FlagsType = FlagFragmentType | Object;
+export type FlagsType = FlagFragmentType | object;
 
 export const parseFlags = (fields : any) : FlagsType => {
   const { flags, rawMessage } = fields;
@@ -30,7 +30,7 @@ export const parseFlags = (fields : any) : FlagsType => {
   // eslint-disable-next-line
   const flagData = flags.split(",")
     .map((field : any) => field.split(":"))
-    .map(([range, list] : String[]) : FlagFragmentType => {
+    .map(([range, list] : string[]) : FlagFragmentType => {
       const [start, end] = range.split("-");
       const categories = list.split("/") ?? [];
       const messageFragment = rawMessage.substring(start, end + 1);

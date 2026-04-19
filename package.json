@@ -1,12 +1,14 @@
 {
   "name": "mtmi",
   "version": "0.0.9",
-  "type": "module",
+  "keywords": [],
+  "license": "ISC",
   "files": [
     "dist"
   ],
-  "module": "dist/index.js",
+  "type": "module",
   "main": "./dist/index.cjs",
+  "module": "dist/index.js",
   "types": "./dist/index.d.cts",
   "exports": {
     ".": {
@@ -27,6 +29,7 @@
     "build": "tsdown",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
+    "lint": "oxlint src",
     "test": "vitest"
   },
   "devDependencies": {
@@ -38,7 +41,5 @@
     "tsdown": "^0.21.9",
     "typescript": "^6.0.3",
     "vite": "^8.0.8"
-  },
-  "keywords": [],
-  "license": "ISC"
+  }
 }

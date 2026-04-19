@@ -7,7 +7,7 @@ const IGNORELIST = [
 ];
 
 export const debugId = (raw : any) => {
-  const [rawFields, rawHost, rawType, rawChannel] = raw.split(" ");
+  const [rawFields, , rawType, rawChannel] = raw.split(" ");
   const fields : Array<string> = raw.substring(1).split(";");
   const id = fields.find(field => field.startsWith("msg-id"));
 
