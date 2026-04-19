@@ -1,8 +1,0 @@
-{
-  "extends": "eslint-config-manzdev",
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "rules": {}
-}
