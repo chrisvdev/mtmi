@@ -1,9 +1,9 @@
-import { parseMysteryGift, MysteryGiftInfoType } from "./gift/parseMysteryGift";
-import { parseStandardPayforward, StandardPayforwardInfoType } from "./gift/parseStandardPayforward";
-import { parseCommunityPayforward, CommunityPayforwardInfoType } from "./gift/parseCommunityPayforward";
-import { parseGiftPaidUpgrade, GiftPaidUpgradeInfoType } from "./gift/parseGiftPaidUpgrade";
-import { parsePrimePaidUpgrade, PrimePaidUpgradeInfoType } from "./gift/parsePrimePaidUpgrade";
-import { parseSubGift, GiftInfoType } from "./gift/parseSubGift";
+import { parseMysteryGift, MysteryGiftInfoType } from "./gift/parseMysteryGift.ts";
+import { parseStandardPayforward, StandardPayforwardInfoType } from "./gift/parseStandardPayforward.ts";
+import { parseCommunityPayforward, CommunityPayforwardInfoType } from "./gift/parseCommunityPayforward.ts";
+import { parseGiftPaidUpgrade, GiftPaidUpgradeInfoType } from "./gift/parseGiftPaidUpgrade.ts";
+import { parsePrimePaidUpgrade, PrimePaidUpgradeInfoType } from "./gift/parsePrimePaidUpgrade.ts";
+import { parseSubGift, GiftInfoType } from "./gift/parseSubGift.ts";
 
 export type GiftType = "submysterygift" | "standardpayforward" | "subgiftpaidupgrade" | "subgift";
 

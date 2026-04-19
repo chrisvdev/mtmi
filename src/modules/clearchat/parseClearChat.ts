@@ -1,6 +1,6 @@
-import { parseEquals } from "@/modules/utils.js";
-import { parseBan, BanInfoType } from "./parseBan";
-import { parseTimeout, TimeoutInfoType } from "./parseTimeout";
+import { parseEquals } from "@/modules/utils.ts";
+import { parseBan, BanInfoType } from "./parseBan.ts";
+import { parseTimeout, TimeoutInfoType } from "./parseTimeout.ts";
 
 export type ClearChatType = "clearchat" | "timeout" | "ban";
 

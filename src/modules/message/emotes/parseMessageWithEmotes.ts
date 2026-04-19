@@ -1,10 +1,10 @@
-import { createEmotesDictionary } from "./createEmotesDictionary";
-import { createFragments } from "./createFragments";
-import { createEmoteImage } from "./createEmoteImage";
+import { createEmotesDictionary } from "./createEmotesDictionary.ts";
+import { createFragments } from "./createFragments.ts";
+import { createEmoteImage } from "./createEmoteImage.ts";
 
 export const parseMessageWithEmotes = (fields : any) => {
   const { rawMessage, emotes } = fields;
-  const newMessage: Array<Object> = [];
+  const newMessage: Array<object> = [];
 
   // El mensaje no tiene emotes
   if (!emotes) {

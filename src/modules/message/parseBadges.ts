@@ -1,6 +1,6 @@
-import { parseSlashToString, cleanMessage } from "@/modules/utils";
-import { BadgeInfoType, parseBadgeInfo } from "./badges/parseBadgeInfo";
-import badgesInfo from "./badges/badges";
+import { parseSlashToString, cleanMessage } from "@/modules/utils.ts";
+import { BadgeInfoType, parseBadgeInfo } from "./badges/parseBadgeInfo.ts";
+import badgesInfo from "./badges/badges.ts";
 
 const MAX_SUB_IMAGE = "https://static-cdn.jtvnw.net/badges/v1/ed51a614-2c44-4a60-80b6-62908436b43a/3";
 const UNKNOWN_BADGE = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCAxOSAxOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjNzc3IiB4PSIwIiB5PSIwIiB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHJ4PSIzIiAvPjxjaXJjbGUgc3Ryb2tlPSIjZWVlIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGN4PSI5LjUiIGN5PSI5LjUiIHI9IjMiIC8+PC9zdmc+";

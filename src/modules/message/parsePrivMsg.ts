@@ -1,4 +1,4 @@
-import { parseIRCHost, parseEquals } from "@/modules/utils";
+import { parseIRCHost, parseEquals } from "@/modules/utils.ts";
 
 export const parsePrivMsg = (rawMessage : string) => {
   // eslint-disable-next-line

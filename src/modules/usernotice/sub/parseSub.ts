@@ -1,5 +1,5 @@
-import { parseSubPlan, SubPlanType } from "@/modules/usernotice/sub/parseSubPlan";
-import { cleanMessage } from "@/modules/utils";
+import { parseSubPlan, SubPlanType } from "@/modules/usernotice/sub/parseSubPlan.ts";
+import { cleanMessage } from "@/modules/utils.ts";
 
 export type SubType = "sub" | "resub";
 

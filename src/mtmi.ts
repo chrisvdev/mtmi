@@ -1,14 +1,14 @@
-import type { EventTypeMap } from "./types";
-import { parseClearChat } from "@/modules/clearchat/parseClearChat";
-import { parseUserMessage } from "@/modules/message/parseUserMessage";
-import { parseJoinPart } from "@/modules/joinpart/parseJoinPart";
-import { parseClearMsg } from "@/modules/clearmsg/parseClearMsg";
-import { parseUserNotice } from "@/modules/usernotice/parseUserNotice";
-import { parseRawMessage } from "@/modules/parseRawMessage";
-import { parseNotice } from "@/modules/notice/parseNotice";
-import { parseRoomState } from "@/modules/roomstate/parseRoomState";
-import { debugId } from "@/debugId";
-import { chop } from "@/modules/utils";
+import type { EventTypeMap } from "./types.ts";
+import { parseClearChat } from "@/modules/clearchat/parseClearChat.ts";
+import { parseUserMessage } from "@/modules/message/parseUserMessage.ts";
+import { parseJoinPart } from "@/modules/joinpart/parseJoinPart.ts";
+import { parseClearMsg } from "@/modules/clearmsg/parseClearMsg.ts";
+import { parseUserNotice } from "@/modules/usernotice/parseUserNotice.ts";
+import { parseRawMessage } from "@/modules/parseRawMessage.ts";
+import { parseNotice } from "@/modules/notice/parseNotice.ts";
+import { parseRoomState } from "@/modules/roomstate/parseRoomState.ts";
+import { debugId } from "@/debugId.ts";
+import { chop } from "@/modules/utils.ts";
 
 interface OptionsObject {
   channels: Array<string>

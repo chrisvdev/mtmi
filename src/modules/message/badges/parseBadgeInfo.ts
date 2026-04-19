@@ -1,4 +1,4 @@
-import { parseSlashToString } from "@/modules/utils";
+import { parseSlashToString } from "@/modules/utils.ts";
 
 /**
  * Badges que el usuario tiene visibles en el chat.

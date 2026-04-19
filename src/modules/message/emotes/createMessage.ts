@@ -1,5 +1,5 @@
-import { createMessageNode } from "./createMessageNode.js";
-import { createMessageBrowser } from "./createMessageBrowser.js";
+import { createMessageNode } from "./createMessageNode.ts";
+import { createMessageBrowser } from "./createMessageBrowser.ts";
 
 export const createMessage = (() => {
   const isBrowser = typeof document !== "undefined";

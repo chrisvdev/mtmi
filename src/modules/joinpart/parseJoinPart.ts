@@ -1,4 +1,4 @@
-import { parseIRCHost } from "@/modules/utils.js";
+import { parseIRCHost } from "@/modules/utils.ts";
 
 export type JoinPartType = "join" | "part";
 

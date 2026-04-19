@@ -1,16 +1,16 @@
-import { cleanMessage } from "@/modules/utils.js";
+import { cleanMessage } from "@/modules/utils.ts";
 
 interface ReplyParentType {
-  displayName: String;
-  msgBody: String;
-  msgId: String;
-  userId: Number;
-  userLogin: String;
+  displayName: string;
+  msgBody: string;
+  msgId: string;
+  userId: number;
+  userLogin: string;
 }
 
 interface ReplyThreadType {
-  parentMsgId: String;
-  parentUserLogin: String;
+  parentMsgId: string;
+  parentUserLogin: string;
 }
 
 interface ReplyType extends ReplyParentType, ReplyThreadType {

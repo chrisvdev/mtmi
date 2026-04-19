@@ -1,5 +1,5 @@
-import { PremiumColorType, ColorType } from "./colors/colors";
-import BOTS from "./bots";
+import { PremiumColorType, ColorType } from "./colors/colors.ts";
+import BOTS from "./bots.ts";
 
 // type UserType = "normal" | "admin" | "global_mod" | "staff";  // Deprecated
 

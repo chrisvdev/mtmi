@@ -3,7 +3,7 @@ import { client } from "../src/mtmi.ts";
 
 // window.client = client;
 
-const channels = ["manzdev"];
+const channels = ["miriam_petricor", "ortopilot", "aniastarlight"];
 
 client.connect({ channels });
 
@@ -41,9 +41,12 @@ client.on("bits", (data) => console.log("BITS: ", data));
 
 client.on("message", (data) => {
   console.log("MESSAGE: ", data);
-  const badges = data.badges.map(item => `<img src="${item.image}" alt="${item.name}">`);
+  const badges = data.badges.map(item => `<img width="32" height="32" src="${item.image}" alt="${item.name}">`);
   const div = document.createElement("div");
-  div.append(data.username);
+  const name = document.createElement("span");
+  name.classList.add("nickname");
+  name.append(data.username);
+  div.append(name);
   div.insertAdjacentHTML("afterbegin", badges.join(""));
   div.append(data.messageInfo.message);
   document.body.append(div);

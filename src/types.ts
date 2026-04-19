@@ -1,23 +1,23 @@
-import type { ClearChatInfoType } from "@/modules/clearchat/parseClearChat";
-import type { BanInfoType } from "@/modules/clearchat/parseBan";
-import type { TimeoutInfoType } from "@/modules/clearchat/parseTimeout";
-import type { ClearMsgInfoType } from "@/modules/clearmsg/parseClearMsg";
-import type { RoomStateInfoType } from "@/modules/roomstate/parseRoomState";
-import type { AnnouncementInfoType } from "./modules/usernotice/parseAnnouncement";
-import type { SubInfoType } from "@/modules/usernotice/sub/parseSub";
-import type { UserMessageInfoType } from "@/modules/message/parseUserMessage";
-import type { JoinPartInfoType } from "@/modules/joinpart/parseJoinPart";
-import type { NoticeGroupType } from "@/modules/notice/parseNotice";
-import type { RaidInfoType } from "@/modules/usernotice/parseRaid";
-import type { SubNoticeType } from "@/modules/usernotice/parseUserNotice";
-import type { MysteryGiftInfoType } from "@/modules/usernotice/gift/parseMysteryGift";
-import type { StandardPayforwardInfoType } from "@/modules/usernotice/gift/parseStandardPayforward";
-import type { CommunityPayforwardInfoType } from "@/modules/usernotice/gift/parseCommunityPayforward";
-import type { GiftPaidUpgradeInfoType } from "@/modules/usernotice/gift/parseGiftPaidUpgrade";
-import type { PrimePaidUpgradeInfoType } from "@/modules/usernotice/gift/parsePrimePaidUpgrade";
-import type { GiftInfoType } from "@/modules/usernotice/gift/parseSubGift";
-import type { BitsInfoType } from "@/modules/message/parseBits";
-import type { ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone";
+import type { ClearChatInfoType } from "@/modules/clearchat/parseClearChat.ts";
+import type { BanInfoType } from "@/modules/clearchat/parseBan.ts";
+import type { TimeoutInfoType } from "@/modules/clearchat/parseTimeout.ts";
+import type { ClearMsgInfoType } from "@/modules/clearmsg/parseClearMsg.ts";
+import type { RoomStateInfoType } from "@/modules/roomstate/parseRoomState.ts";
+import type { AnnouncementInfoType } from "@/modules/usernotice/parseAnnouncement.ts";
+import type { SubInfoType } from "@/modules/usernotice/sub/parseSub.ts";
+import type { UserMessageInfoType } from "@/modules/message/parseUserMessage.ts";
+import type { JoinPartInfoType } from "@/modules/joinpart/parseJoinPart.ts";
+import type { NoticeGroupType } from "@/modules/notice/parseNotice.ts";
+import type { RaidInfoType } from "@/modules/usernotice/parseRaid.ts";
+import type { SubNoticeType } from "@/modules/usernotice/parseUserNotice.ts";
+import type { MysteryGiftInfoType } from "@/modules/usernotice/gift/parseMysteryGift.ts";
+import type { StandardPayforwardInfoType } from "@/modules/usernotice/gift/parseStandardPayforward.ts";
+import type { CommunityPayforwardInfoType } from "@/modules/usernotice/gift/parseCommunityPayforward.ts";
+import type { GiftPaidUpgradeInfoType } from "@/modules/usernotice/gift/parseGiftPaidUpgrade.ts";
+import type { PrimePaidUpgradeInfoType } from "@/modules/usernotice/gift/parsePrimePaidUpgrade.ts";
+import type { GiftInfoType } from "@/modules/usernotice/gift/parseSubGift.ts";
+import type { BitsInfoType } from "@/modules/message/parseBits.ts";
+import type { ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone.ts";
 
 export type EventType =
   "join" | "part" |

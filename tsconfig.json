@@ -1,36 +1,32 @@
 {
   "compilerOptions": {
-    /* https://aka.ms/tsconfig */
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "Bundler",  // reemplaza "Node"
     "rootDir": "./src",
-    "moduleResolution": "Node", // "moduleResolution": "Node16",
     "strict": true,
-    "declaration": true,
-    "outDir": "dist",
     "skipLibCheck": true,
-    "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]            // reemplaza baseUrl + paths
     },
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["node"]
   },
   "exclude": [
-    "dist",
-    "docs",
-    "sandbox",
-    "scripts",
-    "public",
-    "vite.config.js",
-    "node_modules",
-    "**/*.test.js",
-    "**/*.test.ts",
-    "**/*.spec.js",
-    "**/*.spec.ts"
+    "dist", "docs", "sandbox", "scripts", "public",
+    "vite.config.js", "node_modules",
+    "**/*.test.js", "**/*.test.ts",
+    "**/*.spec.js", "**/*.spec.ts",
+    "tsdown.config.ts"
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }
   ]
 }

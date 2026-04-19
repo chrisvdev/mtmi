@@ -1,4 +1,4 @@
-import { parseEquals } from "@/modules/utils";
+import { parseEquals } from "@/modules/utils.ts";
 
 export interface RoomStateInfoType {
   type: string,

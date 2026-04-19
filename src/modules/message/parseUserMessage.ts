@@ -1,10 +1,10 @@
-import { parsePrivMsg } from "./parsePrivMsg";
-import { parseReplyMessage, ReplyInfoType } from "./parseReplyMessage";
-import { parseBadges } from "./parseBadges";
-import { UserInfoType, parseUser } from "./parseUser";
-import { MessageInfoType, parseMessage } from "./parseMessage";
-import { parseBits, BitsGroupType } from "./parseBits";
-import { BadgeInfoType } from "./badges/parseBadgeInfo";
+import { parsePrivMsg } from "./parsePrivMsg.ts";
+import { parseReplyMessage, ReplyInfoType } from "./parseReplyMessage.ts";
+import { parseBadges } from "./parseBadges.ts";
+import { UserInfoType, parseUser } from "./parseUser.ts";
+import { MessageInfoType, parseMessage } from "./parseMessage.ts";
+import { parseBits, BitsGroupType } from "./parseBits.ts";
+import { BadgeInfoType } from "./badges/parseBadgeInfo.ts";
 
 export interface UserMessageInfoType {
   type: string,

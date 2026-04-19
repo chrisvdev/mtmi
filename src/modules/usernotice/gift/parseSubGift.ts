@@ -1,6 +1,6 @@
-import { cleanMessage } from "@/modules/utils";
-import { parseSubPlan, SubPlanType } from "@/modules/usernotice/sub/parseSubPlan";
-import { parseGoal, GoalGroupType } from "./parseGoal";
+import { cleanMessage } from "@/modules/utils.ts";
+import { parseSubPlan, SubPlanType } from "@/modules/usernotice/sub/parseSubPlan.ts";
+import { parseGoal, GoalGroupType } from "./parseGoal.ts";
 
 export interface GiftInfoType {
   giftMonths: number,

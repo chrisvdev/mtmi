@@ -1,11 +1,11 @@
-import { parseEquals } from "@/modules/utils";
-import { parseUser, UserInfoType } from "@/modules/message/parseUser";
-import { parseMessage, MessageInfoType } from "@/modules/message/parseMessage";
-import { parseSub, SubInfoOptionalType } from "@/modules/usernotice/sub/parseSub";
-import { parseGift, GiftGroupType } from "@/modules/usernotice/parseGift";
-import { parseRaid, RaidGroupType } from "@/modules/usernotice/parseRaid";
-import { parseAnnouncement, AnnouncementGroupType } from "@/modules/usernotice/parseAnnouncement";
-import { parseViewerMilestone, ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone.js";
+import { parseEquals } from "@/modules/utils.ts";
+import { parseUser, UserInfoType } from "@/modules/message/parseUser.ts";
+import { parseMessage, MessageInfoType } from "@/modules/message/parseMessage.ts";
+import { parseSub, SubInfoOptionalType } from "@/modules/usernotice/sub/parseSub.ts";
+import { parseGift, GiftGroupType } from "@/modules/usernotice/parseGift.ts";
+import { parseRaid, RaidGroupType } from "@/modules/usernotice/parseRaid.ts";
+import { parseAnnouncement, AnnouncementGroupType } from "@/modules/usernotice/parseAnnouncement.ts";
+import { parseViewerMilestone, ViewerMilestoneType } from "@/modules/usernotice/parseViewerMilestone.ts";
 
 export interface BaseUserNotice {
   type: string,

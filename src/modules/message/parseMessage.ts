@@ -1,6 +1,6 @@
-import { parseMessageWithEmotes } from "./emotes/parseMessageWithEmotes";
-import { parseFlags, FlagsType } from "./parseFlags";
-import { createMessage } from "./emotes/createMessage";
+import { parseMessageWithEmotes } from "./emotes/parseMessageWithEmotes.ts";
+import { parseFlags, FlagsType } from "./parseFlags.ts";
+import { createMessage } from "./emotes/createMessage.ts";
 
 export interface MessageInfoType {
   id: string,
@@ -16,7 +16,7 @@ export interface MessageInfoType {
   userId: number,
   tmi: number,
   msgId: string,
-  messageData: Array<Object>,
+  messageData: Array<object>,
   message: HTMLSpanElement,
   rawMessage: string
 }

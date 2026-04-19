@@ -1,4 +1,4 @@
-import { parseEquals } from "@/modules/utils.js";
+import { parseEquals } from "@/modules/utils.ts";
 
 export type NoticeGroupType =
   "emote_only_off" | "emote_only_on" |

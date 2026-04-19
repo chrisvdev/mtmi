@@ -1,4 +1,4 @@
-import { cleanMessage } from "@/modules/utils";
+import { cleanMessage } from "@/modules/utils.ts";
 
 export interface GiftPaidUpgradeInfoType {
   type: string,
