@@ -397,6 +397,12 @@
       "value": 20
     },
     {
+			"text": "nasa-artemis-ii/1",
+			"image": "https://static-cdn.jtvnw.net/badges/v1/52f0ea34-b35a-4bab-97a0-c7d354a27268/3",
+			"description": "NASA Artemis II",
+			"value": 1
+		},
+    {
       "text": "no_audio/1",
       "image": "https://static-cdn.jtvnw.net/badges/v1/aef2cd08-f29b-45a1-8c12-d44d7fd5e6f0/3",
       "description": "Watching without audio",
@@ -510,6 +516,12 @@
       "description": "Staff",
       "value": 1
     },
+    {
+			"text": "share-the-love/1",
+			"image": "https://static-cdn.jtvnw.net/badges/v1/2de71f4f-b152-4308-a426-127a4cf8003a/3",
+			"description": "Share the Love",
+			"value": 1
+		},
     {
       "text": "sub-gift-leader/1",
       "image": "https://static-cdn.jtvnw.net/badges/v1/21656088-7da2-4467-acd2-55220e1f45ad/3",
@@ -762,6 +774,12 @@
       "description": "TwitchCon 2018 - San Jose",
       "value": 1
     },
+    {
+			"text": "twitchcon-2025---rotterdam/1",
+			"image": "https://static-cdn.jtvnw.net/badges/v1/f4d97fd0-437f-4d8d-b4d3-4b6d18e4705b/3",
+			"description": "TwitchCon 2025",
+			"value": 1
+		},
     {
       "text": "twitchconAmsterdam2020/1",
       "image": "https://static-cdn.jtvnw.net/badges/v1/ed917c9a-1a45-4340-9c64-ca8be4348c51/3",
