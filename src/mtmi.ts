@@ -77,7 +77,6 @@ class Client {
     !options.badges && (this.options.badges = "minimal");
     loadBadges().then(({ badges }) => {
       client.badges = badges;
-      console.log(client.badges);
     });
 
     this.#client.addEventListener("open", this.#openHandler);

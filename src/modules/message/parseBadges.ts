@@ -6,20 +6,14 @@ const MAX_SUB_IMAGE = "https://static-cdn.jtvnw.net/badges/v1/ed51a614-2c44-4a60
 const UNKNOWN_BADGE = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCAxOSAxOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjNzc3IiB4PSIwIiB5PSIwIiB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHJ4PSIzIiAvPjxjaXJjbGUgc3Ryb2tlPSIjZWVlIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGN4PSI5LjUiIGN5PSI5LjUiIHI9IjMiIC8+PC9zdmc+";
 
 export const loadBadges = async () => {
-  const file = client.options?.badges === "full" ? "badges.full.json" : "badges.json";
+  const file = client.options?.badges === "full"
+    ? "badges.full.json"
+    : "badges.json";
 
-  // Node
-  if (typeof location === "undefined") {
-    const { readFileSync } = await import("node:fs");
-    const { fileURLToPath } = await import("node:url");
-    const { dirname, join } = await import("node:path");
-    const dir = dirname(fileURLToPath(import.meta.url));
-    return JSON.parse(readFileSync(join(dir, file), "utf-8"));
-  }
+  const url = new URL(`./${file}`, import.meta.url);
+  const data = await import(url.href, { with: { type: "json" }});
 
-  // Browser / CDN / URL
-  const url = new URL(file, import.meta.url);
-  return fetch(url).then(res => res.json());
+  return { badges: data.default.badges };
 }
 
 export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
