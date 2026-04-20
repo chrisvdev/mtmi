@@ -5,32 +5,6 @@ import { client } from "@/mtmi.ts";
 const MAX_SUB_IMAGE = "https://static-cdn.jtvnw.net/badges/v1/ed51a614-2c44-4a60-80b6-62908436b43a/3";
 const UNKNOWN_BADGE = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCAxOSAxOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjNzc3IiB4PSIwIiB5PSIwIiB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHJ4PSIzIiAvPjxjaXJjbGUgc3Ryb2tlPSIjZWVlIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGN4PSI5LjUiIGN5PSI5LjUiIHI9IjMiIC8+PC9zdmc+";
 
-export const loadBadges = async () => {
-  const file = client.options?.badges === "full"
-    ? "badges.full.json"
-    : "badges.json";
-
-  const url = new URL(`./${file}`, import.meta.url);
-
-  // Node file:// scheme support
-  if (url.protocol === "file:") {
-    const { readFile } = await import("node:fs/promises");
-    const data = JSON.parse(await readFile(url.pathname, "utf-8"));
-    return { badges: data.badges }
-  }
-
-  // Deno, Vite, Browser CDN...
-  try {
-    const data = await fetch(url.href).then(res => res.json());
-    return { badges: data.badges };
-  } catch {
-    // Fallback: Node+https scheme
-    const localUrl = import.meta.resolve(`./${file}`);
-    const data = await fetch(localUrl).then(res => res.json());
-    return { badges: data.badges };
-  }
-};
-
 export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
   const badges : any = parseSlashToString(fields.badges) || {};
   const badgeInfo: any = parseBadgeInfo(fields["badge-info"]);

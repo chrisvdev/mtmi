@@ -1,7 +1,6 @@
 import type { EventTypeMap } from "./types.ts";
 import type { CustomJsonApiConfig } from "./modules/message/avatars/getAvatar.ts";
 import { setCustomApiFromJson } from "./modules/message/avatars/getAvatar.ts";
-import { loadBadges } from "@/modules/message/parseBadges.ts";
 import { parseClearChat } from "@/modules/clearchat/parseClearChat.ts";
 import { parseUserMessage } from "@/modules/message/parseUserMessage.ts";
 import { parseJoinPart } from "@/modules/joinpart/parseJoinPart.ts";
@@ -17,7 +16,7 @@ export interface OptionsObject {
   channels: Array<string>;
   secure: boolean;
   avatarProvider: string;
-  badges: "minimal" | "full";
+  badges: Array<BadgeJSONInfoType>;
   customApi: CustomJsonApiConfig;
   debug: boolean;
 }
@@ -74,12 +73,11 @@ class Client {
       ? [...options.channels]
       : [];
     options.customApi && setCustomApiFromJson(options.customApi);
-    !options.badges && (this.options.badges = "minimal");
     !options.debug && (this.options.debug = true);
-    loadBadges().then(({ badges }) => {
-      client.badges = badges;
-      options.debug && console.log(`${badges.length} badges cargados.`);
-    });
+    if (options.badges) {
+      client.badges = options.badges;
+      options.debug && console.log(`${options.badges.length} badges cargados.`);
+    };
 
     this.#client.addEventListener("open", this.#openHandler);
     this.#client.addEventListener("message", this.#messageHandler);

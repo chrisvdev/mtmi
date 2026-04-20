@@ -1,6 +1,5 @@
 import { client } from "../dist/index.js";
-// import { client } from "../src/mtmi.ts";
-// import { client } from "https://unpkg.com/mtmi?module";
+import { badges } from "../dist/badges.full.json";
 
 // window.client = client;
 
@@ -8,7 +7,7 @@ const channels = ["manzdev"];
 
 client.connect({
   channels,
-  badges: "full",
+  badges,
   avatarProvider: "decapi",
   // avatarProvider: "custom",
   // customApi: {
