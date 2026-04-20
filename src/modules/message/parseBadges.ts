@@ -18,7 +18,7 @@ export const loadBadges = async () => {
   }
 
   // Browser / CDN / URL
-  const url = new URL(`/${file}`, import.meta.url);
+  const url = new URL(file, import.meta.url);
   return fetch(url).then(res => res.json());
 }
 
