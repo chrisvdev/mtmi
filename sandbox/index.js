@@ -7,6 +7,7 @@ const channels = ["manzdev"];
 
 client.connect({
   channels,
+  badges: "full",
   avatarProvider: "decapi",
   // avatarProvider: "custom",
   // customApi: {

@@ -11,10 +11,19 @@ export const loadBadges = async () => {
     : "badges.json";
 
   const url = new URL(`./${file}`, import.meta.url);
-  const data = await import(url.href, { with: { type: "json" }});
 
-  return { badges: data.default.badges };
-}
+  let data;
+  try {
+    // Deno, Browser CDN, Node con file://
+    data = await import(url.href, { with: { type: "json" } });
+    return { badges: data.default.badges };
+  } catch {
+    // Fallback: Vite, Node https://
+    const res = await fetch(url.href);
+    data = await res.json();
+    return { badges: data.badges };
+  }
+};
 
 export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
   const badges : any = parseSlashToString(fields.badges) || {};
