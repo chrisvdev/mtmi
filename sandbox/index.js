@@ -1,4 +1,4 @@
-// import { client } from "../dist/mtmi.js";
+// import { client } from "../dist/index.js";
 import { client } from "../src/mtmi.ts";
 
 // window.client = client;
@@ -7,7 +7,8 @@ const channels = ["manzdev"];
 
 client.connect({
   channels,
-  // avatarProvider: "decapi",
+  badges: "full",
+  avatarProvider: "decapi",
   // avatarProvider: "custom",
   // customApi: {
   //   "url": "http://localhost:9999/api/userInfo/{{username}}",
@@ -57,9 +58,9 @@ client.on("message", async (data) => {
   const name = document.createElement("span");
   name.classList.add("nickname");
   name.append(data.username);
-  if (data.userInfo.avatar) div.append(avatar);
   div.append(name);
   div.insertAdjacentHTML("afterbegin", badges.join(""));
+  if (data.userInfo.avatar) div.prepend(avatar);
   div.append(data.messageInfo.message);
   document.body.append(div);
 });

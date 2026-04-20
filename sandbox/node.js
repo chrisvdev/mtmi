@@ -1,4 +1,4 @@
-import { client } from "../dist/mtmi.js";
+import { client } from "../dist/index.js";
 import { styleText } from "node:util";
 
 const channels = ["manzdev"];

@@ -32,10 +32,7 @@ function transformResponse(data) {
     });
 }
 async function saveToFS(badges) {
-  await writeFile(
-    "./src/modules/message/badges/badges.json",
-    JSON.stringify({ badges }, null, "\t"),
-  ); // {badges} -> badges si se prefiere un array
+  await writeFile("./public/badges.full.json", JSON.stringify({ badges }, null, "\t"));
 }
 
 try {
@@ -47,7 +44,7 @@ try {
   console.log(`✔ Transformed ${transformedResponse.length} entries.`);
 
   await saveToFS(transformedResponse);
-  console.log("✔ Saved to src/modules/message/badges/badges.json");
+  console.log("✔ Saved to public/badges.full.json");
 } catch (err) {
   console.error("✖ Error:", err.message);
   process.exit(1);
