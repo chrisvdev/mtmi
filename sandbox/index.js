@@ -1,5 +1,6 @@
 import { client } from "../dist/index.js";
 // import { client } from "../src/mtmi.ts";
+// import { client } from "https://unpkg.com/mtmi?module";
 
 // window.client = client;
 

@@ -24,33 +24,31 @@ export default defineConfig({
       }
     }
   },
-  outputOptions: {
-    comments: {
-      annotation: true,
-      legal: true,
-      jsdoc: true
+  // copy: [
+  //   { from: "public/badges.json", to: "dist" },
+  //   { from: "public/badges.full.json", to: "dist" },
+  // ],
+  plugins: [],
+  inputOptions(options, format) {
+    // options.transform = {
+    //   define: {
+    //     'import.meta.env': '{}'
+    //   }
+    // }
+
+    if (format === 'cjs') {
+      const originalOnLog = options.onLog
+      options.onLog = (level, log, handler) => {
+        if (log.code === 'EMPTY_IMPORT_META') return
+        originalOnLog?.(level, log, handler) ?? handler(level, log)
+      }
     }
+
+    return options
   },
-  plugins: [
-    {
-      name: 'fix-vite-ignore',
-      generateBundle(_, bundle) {
-        for (const chunk of Object.values(bundle)) {
-          if (chunk.type === 'chunk' && chunk.code.includes('@vite-ignore')) {
-            chunk.code = chunk.code.replace(
-              /import\(\s*\/\*!?\s*@vite-ignore\s*\*\/\s*/g,
-              'import(/* @vite-ignore */ '
-            )
-          }
-        }
-      }
-    }
-  ],
-  inputOptions: {
-    transform: {
-      define: {
-        'import.meta.env': '{}'
-      }
-    }
-  }
+  // outputOptions: {
+  //   comments: {
+  //     annotation: true
+  //   }
+  // }
 });

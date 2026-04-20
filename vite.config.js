@@ -15,7 +15,7 @@ export default defineConfig({
   plugins: [],
   build: {
     outDir: "../dist",
-    assetsDir: "./"
+    assetsDir: "./",
   },
   resolve: {
     tsconfigPaths: true

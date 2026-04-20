@@ -12,25 +12,21 @@ export const loadBadges = async () => {
 
   const url = new URL(`./${file}`, import.meta.url);
 
-  let data;
-
-  // Vite (dev bug: unsupported import attributes)
-  const isViteDev = import.meta.env?.DEV;
-
-  if (isViteDev) {
-    const res = await fetch(url.href);
-    data = await res.json();
-    return { badges: data.badges };
+  // Node file:// scheme support
+  if (url.protocol === "file:") {
+    const { readFile } = await import("node:fs/promises");
+    const data = JSON.parse(await readFile(url.pathname, "utf-8"));
+    return { badges: data.badges }
   }
 
+  // Deno, Vite, Browser CDN...
   try {
-    // Deno, Browser CDN, Node+file scheme
-    data = await import(/*! @vite-ignore */ url.href, { with: { type: "json" } });
-    return { badges: data.default.badges };
+    const data = await fetch(url.href).then(res => res.json());
+    return { badges: data.badges };
   } catch {
-    // Fallback: Vite, Node+https scheme
-    const res = await fetch(url.href);
-    data = await res.json();
+    // Fallback: Node+https scheme
+    const localUrl = import.meta.resolve(`./${file}`);
+    const data = await fetch(localUrl).then(res => res.json());
     return { badges: data.badges };
   }
 };

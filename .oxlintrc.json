@@ -25,5 +25,6 @@
   },
   "env": {
     "builtin": true
-  }
+  },
+  "ignorePatterns": ["public/*"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "mtmi",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "keywords": [
     "chat",
     "mtmi",
@@ -25,9 +25,7 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
-    },
-    "./badges.json": "./dist/badges.json",
-    "./badges.full.json": "./dist/badges.full.json"
+    }
   },
   "scripts": {
     "update-badges": "node scripts/getGlobalBadges.js",
