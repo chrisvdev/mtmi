@@ -19,6 +19,7 @@ export interface OptionsObject {
   avatarProvider: string;
   badges: "minimal" | "full";
   customApi: CustomJsonApiConfig;
+  debug: boolean;
 }
 
 export interface BadgeJSONInfoType {
@@ -41,7 +42,6 @@ const DOMAIN = "irc-ws.chat.twitch.tv";
 const WEBSOCKET_URL = `ws://${DOMAIN}:80`;
 const WEBSOCKET_SECURE_URL = `wss://${DOMAIN}:443`;
 const USERNAME = "justinfan123";
-const DEBUG = true;
 
 class Client {
   #done = false;
@@ -75,8 +75,10 @@ class Client {
       : [];
     options.customApi && setCustomApiFromJson(options.customApi);
     !options.badges && (this.options.badges = "minimal");
+    !options.debug && (this.options.debug = true);
     loadBadges().then(({ badges }) => {
       client.badges = badges;
+      options.debug && console.log(`${badges.length} badges cargados.`);
     });
 
     this.#client.addEventListener("open", this.#openHandler);
@@ -91,7 +93,7 @@ class Client {
   }
 
   #open() {
-    DEBUG && console.log("Conectado a Twitch.");
+    this.options?.debug && console.log("Conectado a Twitch.");
 
     this.#client?.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
     this.#client?.send(`NICK ${USERNAME}`);
@@ -198,7 +200,7 @@ class Client {
 
   pong() {
     this.#client?.send("PONG :tmi.twitch.tv");
-    DEBUG && console.log("PONG :tmi.twitch.tv");
+    this.options?.debug && console.log("PONG :tmi.twitch.tv");
   }
 
   close() {
@@ -210,7 +212,7 @@ class Client {
 
   #close(event : any) {
     const { type, reason, code } = event;
-    DEBUG && console.log(`${type}: REASON ${reason} ${code}`);
+    this.options?.debug && console.log(`${type}: REASON ${reason} ${code}`);
     this.close();
 
     if (code === 1006) {
