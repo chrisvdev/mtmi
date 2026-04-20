@@ -14,11 +14,11 @@ export const loadBadges = async () => {
 
   let data;
   try {
-    // Deno, Browser CDN, Node con file://
+    // Deno, Browser CDN, Node+file scheme
     data = await import(url.href, { with: { type: "json" } });
     return { badges: data.default.badges };
   } catch {
-    // Fallback: Vite, Node https://
+    // Fallback: Vite, Node+https scheme
     const res = await fetch(url.href);
     data = await res.json();
     return { badges: data.badges };
