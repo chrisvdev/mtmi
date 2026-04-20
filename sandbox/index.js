@@ -3,9 +3,17 @@ import { client } from "../src/mtmi.ts";
 
 // window.client = client;
 
-const channels = ["miriam_petricor", "ortopilot", "aniastarlight"];
+const channels = ["aniastarlight"];
 
-client.connect({ channels });
+client.connect({
+  channels,
+  // avatarProvider: "decapi",
+  // avatarProvider: "custom",
+  // customApi: {
+  //   "url": "http://localhost:9999/api/userInfo/{{username}}",
+  //   "extract": "picture"
+  // }
+});
 
 // client.on("join", (data) => console.log("JOIN: ", data));
 // client.on("part", (data) => console.log("PART: ", data));
@@ -39,13 +47,17 @@ client.on("announcement", (data) => console.log("ANNOUNCEMENT: ", data));
 
 client.on("bits", (data) => console.log("BITS: ", data));
 
-client.on("message", (data) => {
+client.on("message", async (data) => {
   console.log("MESSAGE: ", data);
   const badges = data.badges.map(item => `<img width="32" height="32" src="${item.image}" alt="${item.name}">`);
   const div = document.createElement("div");
+  const avatar = document.createElement("img");
+  avatar.src = await data.userInfo.avatar;
+  avatar.alt = data.username;
   const name = document.createElement("span");
   name.classList.add("nickname");
   name.append(data.username);
+  if (data.userInfo.avatar) div.append(avatar);
   div.append(name);
   div.insertAdjacentHTML("afterbegin", badges.join(""));
   div.append(data.messageInfo.message);

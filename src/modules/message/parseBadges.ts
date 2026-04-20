@@ -10,15 +10,6 @@ export const parseBadges = (fields : any) : Array<BadgeInfoType> => {
   const badgeInfo: any = parseBadgeInfo(fields["badge-info"]);
   const badgesName = Object.keys(badges);
 
-  // DEBUG
-  /*
-  const isPresent = badgesName.every(badge => badgesInfo.map(b => b.text.split("/").at(0)).includes(badge));
-  !isPresent && console.log("----> badge descubierto: ", badges);
-  const biKeys = Object.keys(badgeInfo).filter(key => key !== "subscriber" && key !== "founder");
-  biKeys.length > 0 && console.log(badgeInfo);
-  */
-  // ***
-
   return badgesName.map(name => {
     const value = badges[name];
     const key = `${name}/${value}`;

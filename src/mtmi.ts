@@ -1,4 +1,6 @@
 import type { EventTypeMap } from "./types.ts";
+import type { CustomJsonApiConfig } from "./modules/message/avatars/getAvatar.ts";
+import { setCustomApiFromJson } from "./modules/message/avatars/getAvatar.ts";
 import { parseClearChat } from "@/modules/clearchat/parseClearChat.ts";
 import { parseUserMessage } from "@/modules/message/parseUserMessage.ts";
 import { parseJoinPart } from "@/modules/joinpart/parseJoinPart.ts";
@@ -10,9 +12,11 @@ import { parseRoomState } from "@/modules/roomstate/parseRoomState.ts";
 import { debugId } from "@/debugId.ts";
 import { chop } from "@/modules/utils.ts";
 
-interface OptionsObject {
+export interface OptionsObject {
   channels: Array<string>;
-  secure: boolean
+  secure: boolean,
+  avatarProvider: string,
+  customApi: CustomJsonApiConfig
 }
 
 interface OnParametersType<T extends keyof EventTypeMap> {
@@ -27,10 +31,10 @@ const USERNAME = "justinfan123";
 const DEBUG = true;
 
 class Client {
-  #client : WebSocket | undefined;
-  #startTime: number | undefined;   // eslint-disable-line
-  #events : Array<OnParametersType<any>> = [];
   #done = false;
+  #startTime: number | undefined;   // eslint-disable-line
+  #client : WebSocket | undefined;
+  #events : Array<OnParametersType<any>> = [];
   channels : Array<string> = [];
   options: OptionsObject | undefined;
 
@@ -50,11 +54,12 @@ class Client {
     this.#done = false;
     this.#startTime = new Date().getTime();
     this.#client = (options.secure ?? true)
-      ? new WebSocket(WEBSOCKET_SECURE_URL)
-      : new WebSocket(WEBSOCKET_URL);
+    ? new WebSocket(WEBSOCKET_SECURE_URL)
+    : new WebSocket(WEBSOCKET_URL);
     this.channels = "channels" in options
-      ? [...options.channels]
-      : [];
+    ? [...options.channels]
+    : [];
+    this.options.customApi && setCustomApiFromJson(this.options.customApi);
 
     this.#client.addEventListener("open", this.#openHandler);
     this.#client.addEventListener("message", this.#messageHandler);
