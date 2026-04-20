@@ -13,9 +13,19 @@ export const loadBadges = async () => {
   const url = new URL(`./${file}`, import.meta.url);
 
   let data;
+
+  // Vite (dev bug: unsupported import attributes)
+  const isViteDev = import.meta.env?.DEV;
+
+  if (isViteDev) {
+    const res = await fetch(url.href);
+    data = await res.json();
+    return { badges: data.badges };
+  }
+
   try {
     // Deno, Browser CDN, Node+file scheme
-    data = await import(url.href, { with: { type: "json" } });
+    data = await import(/*! @vite-ignore */ url.href, { with: { type: "json" } });
     return { badges: data.default.badges };
   } catch {
     // Fallback: Vite, Node+https scheme

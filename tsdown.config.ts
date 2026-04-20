@@ -23,5 +23,34 @@ export default defineConfig({
         writeFileSync(`dist/${file}`, JSON.stringify(json));
       }
     }
+  },
+  outputOptions: {
+    comments: {
+      annotation: true,
+      legal: true,
+      jsdoc: true
+    }
+  },
+  plugins: [
+    {
+      name: 'fix-vite-ignore',
+      generateBundle(_, bundle) {
+        for (const chunk of Object.values(bundle)) {
+          if (chunk.type === 'chunk' && chunk.code.includes('@vite-ignore')) {
+            chunk.code = chunk.code.replace(
+              /import\(\s*\/\*!?\s*@vite-ignore\s*\*\/\s*/g,
+              'import(/* @vite-ignore */ '
+            )
+          }
+        }
+      }
+    }
+  ],
+  inputOptions: {
+    transform: {
+      define: {
+        'import.meta.env': '{}'
+      }
+    }
   }
 });
