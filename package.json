@@ -1,8 +1,14 @@
 {
   "name": "mtmi",
   "version": "0.0.10",
-  "keywords": [],
+  "keywords": [
+    "chat",
+    "mtmi",
+    "stream",
+    "twitch"
+  ],
   "license": "ISC",
+  "author": "ManzDev",
   "files": [
     "dist"
   ],
