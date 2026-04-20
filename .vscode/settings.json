@@ -43,6 +43,7 @@
     "*.ts": "$(capture).js, $(capture).*.ts",
     "*.tsx": "$(capture).ts",
     "index.d.ts": "*.d.ts",
+    "index.cjs": "*.d.cts",
     "shims.d.ts": "*.d.ts",
     "go.mod": ".air*, go.sum",
     ".env": "*.env, .env*, env.d.ts",

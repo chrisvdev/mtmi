@@ -10,5 +10,8 @@ export default defineConfig({
   clean: true,
   alias: {
     "@": resolve("./src")
-  }
+  },
+  outExtensions: ({ format }) => ({
+    js: format === "es" ? ".js" : ".cjs",
+  })
 });
