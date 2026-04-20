@@ -1,6 +1,6 @@
 {
   "name": "mtmi",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "keywords": [
     "chat",
     "mtmi",
@@ -13,26 +13,21 @@
     "dist"
   ],
   "type": "module",
-  "main": "./dist/index.cjs",
   "module": "dist/index.js",
   "types": "./dist/index.d.cts",
   "exports": {
     ".": {
       "import": {
-        "browser": {
-          "types": "./dist/index.d.ts",
-          "default": "./dist/index.js"
-        },
-        "default": {
-          "types": "./dist/index.d.ts",
-          "default": "./dist/index.js"
-        }
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
-    }
+    },
+    "./badges.json": "./dist/badges.json",
+    "./badges.full.json": "./dist/badges.full.json"
   },
   "scripts": {
     "update-badges": "node scripts/getGlobalBadges.js",
